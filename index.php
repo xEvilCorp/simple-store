@@ -1,15 +1,24 @@
-<?require 'rb.php';?>
-<?R::setup( 'mysql:host=localhost;dbname=bancoloja', 'root', '' );?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
-</html>
+<?php
+if (isset($_GET['filename'])) {
+    switch (strtolower($_GET['filename'])) {
+        case '':
+            $page_title = 'Loja';
+            $page_content = 'pages/home.php';
+            include('templates/main-template.php');
+            break;
+        case 'cadastrar':
+        case 'signup':
+            $page_title = 'Nova conta';
+            $page_content = 'pages/signup.php';
+            include('templates/clean-template.php');
+            break;
+        default:
+            header('HTTP/1.0 404 Not Found');
+            include('pages/404.html');
+            break;
+    }
+} else {
+    $page_title = 'Loja';
+    $page_content = 'pages/home.php';
+    include('templates/main-template.php');
+}
